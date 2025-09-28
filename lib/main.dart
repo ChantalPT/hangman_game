@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hangman_game/presentation/screens/widgets/home_screen.dart';
 
 void main() {
-  runApp(const HangmanGame());
+  runApp(const HangmanGameApp());
 }
 
-class HangmanGame extends StatelessWidget {
-  const HangmanGame({super.key});
+class HangmanGameApp extends StatelessWidget {
+  const HangmanGameApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Hangman Game')),
-        body: const Center(child: Text('A chambear')),
-      ),
+      title: 'Hangman Game',
+      home: const HomeScreen(),
     );
   }
 }
