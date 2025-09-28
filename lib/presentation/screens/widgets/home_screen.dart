@@ -8,10 +8,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xfff9f3e4),
 
-      body: Center(
+      body: Left(
         child: SizedBox(
           width: 600,
 
+          //podriamos probar con singlechildscrollview para tener scroll
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,11 +24,43 @@ class HomeScreen extends StatelessWidget {
                   borderRadius: BorderRadiusGeometry.circular(15),
                 ),
 
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [Text('Won'), Text('Total'), Text('Lost')],
+                child: ConstrainedBox(
+                  //permite colocar un tamano minimo y max a la card
+                  constraints: BoxConstraints(minHeight: 100),
+
+                  child: Padding(
+                    //padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.only(top: 33),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        Text(
+                          'Won',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 76, 74, 74),
+                          ),
+                        ),
+                        Text(
+                          'Total',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 76, 74, 74),
+                          ),
+                        ),
+                        Text(
+                          'Lost',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 76, 74, 74),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -41,23 +74,50 @@ class HomeScreen extends StatelessWidget {
               ),
               Text(
                 'Guess de word letter by letter',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
               Card(
                 elevation: 8,
-                margin: EdgeInsets.all(30),
+                margin: EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(15),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      Text('Errors'),
-                      Text('Correct'),
-                      Text('Attempts'),
-                    ],
+
+                child: ConstrainedBox(
+                  //permite colocar un tamano minimo y max a la card
+                  constraints: BoxConstraints(minHeight: 100),
+
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 33),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        Text(
+                          'Errors',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 76, 74, 74),
+                          ),
+                        ),
+                        Text(
+                          'Correct',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 76, 74, 74),
+                          ),
+                        ),
+                        Text(
+                          'Attempts',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 76, 74, 74),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
