@@ -25,7 +25,6 @@ class HomeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Row(
-                    //mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: const [Text('Won'), Text('Total'), Text('Lost')],
                   ),
@@ -33,11 +32,32 @@ class HomeScreen extends StatelessWidget {
               ),
               Text(
                 'Hangman Game',
-                style: TextStyle(fontSize: 45, fontWeight: FontWeight.w100),
+                style: TextStyle(
+                  fontSize: 45,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xffd04fea),
+                ),
               ),
               Text(
                 'Guess de word letter by letter',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+              Card(
+                margin: EdgeInsets.all(30),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: const [
+                      Text('Errors'),
+                      Text('Correct'),
+                      Text('Attempts'),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
@@ -46,14 +66,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-                    
-              // Text(
-              //   'Hangman Game',
-              //   style: TextStyle(fontSize: 38, fontWeight: FontWeight.w100),
-              // ),
-              // Text(
-              //   'Guess de word letter by letter',
-              //   style: TextStyle(fontSize: 18),
-              // ),
-            
