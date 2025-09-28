@@ -10,13 +10,14 @@ class HomeScreen extends StatelessWidget {
 
       body: Center(
         child: SizedBox(
-          width: 800,
+          width: 600,
 
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Card(
+                elevation: 8,
                 margin: EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(15),
@@ -43,6 +44,7 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
               Card(
+                elevation: 8,
                 margin: EdgeInsets.all(30),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(15),
@@ -56,6 +58,24 @@ class HomeScreen extends StatelessWidget {
                       Text('Correct'),
                       Text('Attempts'),
                     ],
+                  ),
+                ),
+              ),
+              Card(
+                elevation: 8,
+                margin: EdgeInsets.all(30),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(15),
+                ),
+
+                child: ConstrainedBox(
+                  //permite colocar un tamano minimo y max a la card
+                  constraints: BoxConstraints(minHeight: 400, maxHeight: 500),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    ),
                   ),
                 ),
               ),
