@@ -12,7 +12,7 @@ class HangmanGameApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Hangman Game',
+      theme: ThemeData(useMaterial3: true),
       home: const HomeScreen(),
     );
   }
