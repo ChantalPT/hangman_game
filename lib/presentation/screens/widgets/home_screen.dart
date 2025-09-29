@@ -66,8 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
       currentWord = currentWord.guessLetter(letter);
 
       if (currentWord.isComplete) {
+        won++;
         _nextWord();
       } else if (currentWord.isLost) {
+        lost++;
         _nextWord();
       }
     });
@@ -80,169 +82,268 @@ class _HomeScreenState extends State<HomeScreen> {
         Scaffold(
           backgroundColor: Color(0xfff9f3e4),
           body: Center(
-            child: SizedBox(
-              width: 600,
+            child: SingleChildScrollView(
+              child: SizedBox(
+                width: 600,
+                child: loading || wordList.isEmpty
+                    ? const CircularProgressIndicator()
+                    : Column(
+                        //mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 20),
 
-              //podriamos probar con singlechildscrollview para tener scroll
-              child: loading || wordList.isEmpty
-                  ? const CircularProgressIndicator()
-                  : Column(
-                      //mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 20),
-                        Card(
-                          elevation: 8,
-                          margin: EdgeInsets.all(16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.circular(15),
-                          ),
-                          child: ConstrainedBox(
-                            //permite colocar un tamano minimo y max a la card
-                            constraints: BoxConstraints(minHeight: 100),
+                          //Stats card
+                          Card(
+                            elevation: 8,
+                            margin: EdgeInsets.all(16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(15),
+                            ),
+                            child: ConstrainedBox(
+                              //permite colocar un tamano minimo y max a la card
+                              constraints: BoxConstraints(minHeight: 100),
 
-                            child: Padding(
-                              //padding: const EdgeInsets.all(16),
-                              padding: const EdgeInsets.only(top: 33),
+                              child: Padding(
+                                //padding: const EdgeInsets.all(16),
+                                padding: const EdgeInsets.only(top: 20),
 
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text(
-                                    'Won',
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromARGB(255, 76, 74, 74),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '$won',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Won',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromARGB(
+                                              255,
+                                              76,
+                                              74,
+                                              74,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text(
-                                    'Total',
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromARGB(255, 76, 74, 74),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '${won + lost}',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xffd04fea),
+                                          ),
+                                        ),
+
+                                        Text(
+                                          'Total',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromARGB(
+                                              255,
+                                              76,
+                                              74,
+                                              74,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text(
-                                    'Lost',
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromARGB(255, 76, 74, 74),
+
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '$lost',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+
+                                        Text(
+                                          'Lost',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromARGB(
+                                              255,
+                                              76,
+                                              74,
+                                              74,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Text(
-                          'Hangman Game',
-                          style: TextStyle(
-                            fontSize: 45,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xffd04fea),
+
+                          //Title and subtitle
+                          Text(
+                            'Hangman Game',
+                            style: TextStyle(
+                              fontSize: 45,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xffd04fea),
+                            ),
                           ),
-                        ),
-                        Text(
-                          'Guess the word letter by letter',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(height: 20),
-                        Card(
-                          elevation: 8,
-                          margin: const EdgeInsets.all(30),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                          Text(
+                            'Guess the word letter by letter',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                                minHeight: 120, maxHeight: 200),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Center(
-                                child: Wrap(
-                                  alignment: WrapAlignment.center,
-                                  spacing: 10,
-                                  runSpacing: 10,
-                                  children: currentWord.display
-                                      .split(
-                                          ' ') // display ya devuelve "a _ _ o"
-                                      .map((char) => Text(
+                          const SizedBox(height: 20),
+
+                          Card(
+                            elevation: 8,
+                            margin: const EdgeInsets.all(30),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusGeometry.circular(15),
+                            ),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(minHeight: 100),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'algo',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Card(
+                            elevation: 8,
+                            margin: const EdgeInsets.all(30),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minHeight: 120,
+                                maxHeight: 200,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Center(
+                                  child: Wrap(
+                                    alignment: WrapAlignment.center,
+                                    spacing: 10,
+                                    runSpacing: 10,
+                                    children: currentWord.display
+                                        .split(
+                                          ' ',
+                                        ) // display ya devuelve "a _ _ o"
+                                        .map(
+                                          (char) => Text(
                                             char,
                                             style: const TextStyle(
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff4c4a4a),
                                             ),
-                                          ))
-                                      .toList(),
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Card(
-                          elevation: 8,
-                          margin: const EdgeInsets.all(16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: LayoutBuilder(
-                              builder: (context, constraints) {
-                                // ancho disponible dentro de la card
-                                final width = constraints.maxWidth;
+                          Card(
+                            elevation: 8,
+                            margin: const EdgeInsets.all(16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: LayoutBuilder(
+                                builder: (context, constraints) {
+                                  // ancho disponible dentro de la card
+                                  final width = constraints.maxWidth;
 
-                                // calculamos el tamaño de cada botón en base al ancho
-                                final buttonSize = width < 500 ? 35.0 : 45.0;
+                                  // calculamos el tamaño de cada botón en base al ancho
+                                  final buttonSize = width < 500 ? 35.0 : 45.0;
 
-                                return SingleChildScrollView(
-                                  child: Wrap(
-                                    spacing: 8,
-                                    runSpacing: 8,
-                                    alignment: WrapAlignment.center,
-                                    children: 'abcdefghijklmnopqrstuvwxyz'
-                                        .split('')
-                                        .map((letter) {
-                                      final alreadyGuessed = currentWord
-                                          .lettersGuessed
-                                          .contains(letter);
-                                      return SizedBox(
-                                        width: buttonSize,
-                                        height: buttonSize,
-                                        child: ElevatedButton(
-                                          onPressed: alreadyGuessed
-                                              ? null
-                                              : () => onGuess(letter),
-                                          style: ElevatedButton.styleFrom(
-                                            padding: EdgeInsets.zero,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                          child: Text(
-                                            letter,
-                                            style: TextStyle(
-                                              fontSize: buttonSize * 0.4,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                );
-                              },
+                                  return SingleChildScrollView(
+                                    child: Wrap(
+                                      spacing: 8,
+                                      runSpacing: 8,
+                                      alignment: WrapAlignment.center,
+                                      children: 'abcdefghijklmnopqrstuvwxyz'
+                                          .split('')
+                                          .map((letter) {
+                                            final alreadyGuessed = currentWord
+                                                .lettersGuessed
+                                                .contains(letter);
+                                            return SizedBox(
+                                              width: buttonSize,
+                                              height: buttonSize,
+                                              child: ElevatedButton(
+                                                onPressed: alreadyGuessed
+                                                    ? null
+                                                    : () => onGuess(letter),
+                                                style: ElevatedButton.styleFrom(
+                                                  padding: EdgeInsets.zero,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          8,
+                                                        ),
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  letter,
+                                                  style: TextStyle(
+                                                    fontSize: buttonSize * 0.4,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          })
+                                          .toList(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ],
                       ),
-                    ),
+              ),
             ),
           ),
         ),
@@ -275,9 +376,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       setState(() => errorMessage = null);
                     },
-                    child:
-                        const Icon(Icons.close, color: Colors.white, size: 18),
-                  )
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ),
                 ],
               ),
             ),
