@@ -8,8 +8,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xfff9f3e4),
 
-      body: Align(
-        alignment: Alignment.centerLeft,
+      body: Center(
         child: SizedBox(
           width: 600,
 
