@@ -360,6 +360,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+
+                          //Board
                           Card(
                             elevation: 8,
                             margin: const EdgeInsets.all(16),
