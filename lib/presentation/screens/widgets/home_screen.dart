@@ -19,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int attempts = 0;
   bool loading = true;
   List<String> wordList = [];
+  List<String> correctLetters = [];
+  List<String> wrongLetters = [];
   int currentIndex = 0;
   String? errorMessage;
 
@@ -70,14 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onGuess(String letter) {
     setState(() {
+      currentWord = currentWord.guessLetter(letter);
+
       if (currentWord.originalWord.contains(letter)) {
         correctGuesses++;
       } else {
         wrongGuesses++;
       }
       attempts++;
-
-      currentWord = currentWord.guessLetter(letter);
 
       if (currentWord.isComplete) {
         won++;
@@ -228,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const SizedBox(height: 20),
 
+                          //Attempts card
                           Card(
                             elevation: 8,
                             margin: const EdgeInsets.all(30),
@@ -322,6 +325,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+
+                          //Word guessing card
                           Card(
                             elevation: 8,
                             margin: const EdgeInsets.all(30),
@@ -396,14 +401,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 onPressed: alreadyGuessed
                                                     ? null
                                                     : () => onGuess(letter),
-                                                style: ElevatedButton.styleFrom(
-                                                  padding: EdgeInsets.zero,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          8,
-                                                        ),
+
+                                                //Cambiar color de los botones
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      WidgetStateProperty.resolveWith<
+                                                        Color
+                                                      >((states) {
+                                                        if (alreadyGuessed) {
+                                                          // Color si ya fue adivinada
+                                                          if (currentWord
+                                                              .originalWord
+                                                              .contains(
+                                                                letter,
+                                                              )) {
+                                                            return Color(
+                                                              0xFFdeebd1,
+                                                            );
+                                                          } else {
+                                                            return Color(
+                                                              0xfff1ddd6,
+                                                            );
+                                                          }
+                                                        }
+                                                        return Colors.white;
+                                                      }),
+
+                                                  shape: WidgetStateProperty.all(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            8,
+                                                          ),
+                                                    ),
                                                   ),
+                                                  minimumSize:
+                                                      WidgetStateProperty.all(
+                                                        Size(
+                                                          buttonSize,
+                                                          buttonSize,
+                                                        ),
+                                                      ),
+                                                  padding:
+                                                      WidgetStateProperty.all(
+                                                        EdgeInsets.zero,
+                                                      ),
                                                 ),
                                                 child: Text(
                                                   letter,
