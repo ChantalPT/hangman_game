@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       final repo = WordRepositoryImpl(WordRemoteDatasource());
-      final words = await repo.getRandomWords(20);
+      final words = await repo.getRandomWords(5);
 
       setState(() {
         wordList = words.map((w) => w.toLowerCase()).toList();
@@ -163,7 +163,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: Color(0xffd04fea),
                                           ),
                                         ),
-
                                         Text(
                                           'Total',
                                           style: TextStyle(
@@ -179,7 +178,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ],
                                     ),
-
                                     Column(
                                       children: [
                                         Text(
@@ -190,7 +188,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: Colors.red,
                                           ),
                                         ),
-
                                         Text(
                                           'Lost',
                                           style: TextStyle(
@@ -391,72 +388,68 @@ class _HomeScreenState extends State<HomeScreen> {
                                       children: 'abcdefghijklmnopqrstuvwxyz'
                                           .split('')
                                           .map((letter) {
-                                            final alreadyGuessed = currentWord
-                                                .lettersGuessed
-                                                .contains(letter);
-                                            return SizedBox(
-                                              width: buttonSize,
-                                              height: buttonSize,
-                                              child: ElevatedButton(
-                                                onPressed: alreadyGuessed
-                                                    ? null
-                                                    : () => onGuess(letter),
+                                        final alreadyGuessed = currentWord
+                                            .lettersGuessed
+                                            .contains(letter);
+                                        return SizedBox(
+                                          width: buttonSize,
+                                          height: buttonSize,
+                                          child: ElevatedButton(
+                                            onPressed: alreadyGuessed
+                                                ? null
+                                                : () => onGuess(letter),
 
-                                                //Cambiar color de los botones
-                                                style: ButtonStyle(
-                                                  backgroundColor:
-                                                      WidgetStateProperty.resolveWith<
-                                                        Color
-                                                      >((states) {
-                                                        if (alreadyGuessed) {
-                                                          // Color si ya fue adivinada
-                                                          if (currentWord
-                                                              .originalWord
-                                                              .contains(
-                                                                letter,
-                                                              )) {
-                                                            return Color(
-                                                              0xFFdeebd1,
-                                                            );
-                                                          } else {
-                                                            return Color(
-                                                              0xfff1ddd6,
-                                                            );
-                                                          }
-                                                        }
-                                                        return Colors.white;
-                                                      }),
-
-                                                  shape: WidgetStateProperty.all(
-                                                    RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            8,
-                                                          ),
-                                                    ),
-                                                  ),
-                                                  minimumSize:
-                                                      WidgetStateProperty.all(
-                                                        Size(
-                                                          buttonSize,
-                                                          buttonSize,
-                                                        ),
-                                                      ),
-                                                  padding:
-                                                      WidgetStateProperty.all(
-                                                        EdgeInsets.zero,
-                                                      ),
-                                                ),
-                                                child: Text(
-                                                  letter,
-                                                  style: TextStyle(
-                                                    fontSize: buttonSize * 0.4,
+                                            //Cambiar color de los botones
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  WidgetStateProperty
+                                                      .resolveWith<Color>(
+                                                          (states) {
+                                                if (alreadyGuessed) {
+                                                  // Color si ya fue adivinada
+                                                  if (currentWord.originalWord
+                                                      .contains(
+                                                    letter,
+                                                  )) {
+                                                    return Color(
+                                                      0xFFdeebd1,
+                                                    );
+                                                  } else {
+                                                    return Color(
+                                                      0xfff1ddd6,
+                                                    );
+                                                  }
+                                                }
+                                                return Colors.white;
+                                              }),
+                                              shape: WidgetStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    8,
                                                   ),
                                                 ),
                                               ),
-                                            );
-                                          })
-                                          .toList(),
+                                              minimumSize:
+                                                  WidgetStateProperty.all(
+                                                Size(
+                                                  buttonSize,
+                                                  buttonSize,
+                                                ),
+                                              ),
+                                              padding: WidgetStateProperty.all(
+                                                EdgeInsets.zero,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              letter,
+                                              style: TextStyle(
+                                                fontSize: buttonSize * 0.4,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
                                     ),
                                   );
                                 },

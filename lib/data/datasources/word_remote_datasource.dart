@@ -1,18 +1,28 @@
 import 'package:dio/dio.dart';
+import 'dart:convert';
 
 class WordRemoteDatasource {
   final Dio dio = Dio();
-  final String baseUrl = "https://random-word-api.herokuapp.com";
+  final String baseUrl = "https://proxy-systems-info.vercel.app";
 
   Future<List<String>> getRandomWords(int count) async {
-    final response = await dio.get("${baseUrl}/word?number=$count&lang=es");
+    try {
+      final response = await dio.get("$baseUrl/api/words?number=$count");
 
-    if (response.statusCode == 200) {
-      final List<dynamic> data = response.data;
+      if (response.statusCode == 200) {
+        final data = response.data;
 
-      return data.map((w) => w.toString()).toList();
-    } else {
-      throw Exception("Error at trying to get words from the API");
+        // Aseguramos que sea lista
+        if (data is List) {
+          return data.map((w) => w.toString()).toList();
+        } else {
+          throw Exception("Unexpected response format: $data");
+        }
+      } else {
+        throw Exception("Error at trying to get words from proxy API");
+      }
+    } catch (e) {
+      throw Exception("Network error: $e");
     }
   }
 }
