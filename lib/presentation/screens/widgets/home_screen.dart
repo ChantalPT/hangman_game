@@ -7,7 +7,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff9f3e4),
-
       body: Center(
         child: SizedBox(
           width: 600,
@@ -23,7 +22,6 @@ class HomeScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(15),
                 ),
-
                 child: ConstrainedBox(
                   //permite colocar un tamano minimo y max a la card
                   constraints: BoxConstraints(minHeight: 100),
@@ -82,7 +80,6 @@ class HomeScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(15),
                 ),
-
                 child: ConstrainedBox(
                   //permite colocar un tamano minimo y max a la card
                   constraints: BoxConstraints(minHeight: 100),
@@ -127,7 +124,6 @@ class HomeScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.circular(15),
                 ),
-
                 child: ConstrainedBox(
                   //permite colocar un tamano minimo y max a la card
                   constraints: BoxConstraints(minHeight: 400, maxHeight: 500),
