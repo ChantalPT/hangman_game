@@ -231,10 +231,74 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(
                                       children: [
                                         Text(
-                                          'algo',
+                                          'num errores',
                                           style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Errors',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromARGB(
+                                              255,
+                                              76,
+                                              74,
+                                              74,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'num correctas',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Correct',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromARGB(
+                                              255,
+                                              76,
+                                              74,
+                                              74,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'num intentos',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.greenAccent,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Attempts',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromARGB(
+                                              255,
+                                              76,
+                                              74,
+                                              74,
+                                            ),
                                           ),
                                         ),
                                       ],
