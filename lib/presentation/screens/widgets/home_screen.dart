@@ -14,6 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   late Word currentWord;
   int won = 0;
   int lost = 0;
+  int correctGuesses = 0;
+  int wrongGuesses = 0;
+  int attempts = 0;
   bool loading = true;
   List<String> wordList = [];
   int currentIndex = 0;
@@ -55,6 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         currentIndex++;
         currentWord = Word(originalWord: wordList[currentIndex]);
+
+        correctGuesses = 0;
+        wrongGuesses = 0;
+        attempts = 0;
       });
     } else {
       await _fetchWords(); // cuando se acaban, trae 20 más
@@ -63,6 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onGuess(String letter) {
     setState(() {
+      if (currentWord.originalWord.contains(letter)) {
+        correctGuesses++;
+      } else {
+        wrongGuesses++;
+      }
+      attempts++;
+
       currentWord = currentWord.guessLetter(letter);
 
       if (currentWord.isComplete) {
@@ -231,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(
                                       children: [
                                         Text(
-                                          'num errores',
+                                          '$wrongGuesses',
                                           style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
@@ -256,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(
                                       children: [
                                         Text(
-                                          'num correctas',
+                                          '$correctGuesses',
                                           style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
@@ -281,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(
                                       children: [
                                         Text(
-                                          'num intentos',
+                                          '$attempts',
                                           style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
