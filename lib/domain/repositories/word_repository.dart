@@ -1,3 +1,3 @@
 abstract class WordRepository {
-  Future<String> getRandomWord();
+  Future<List<String>> getRandomWords();
 }
