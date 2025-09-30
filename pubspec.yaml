@@ -89,3 +89,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+  assets:
+    - assets/images/1-removebg-preview.png
+    - assets/images/2-removebg-preview.png
+    - assets/images/3-removebg-preview.png
+    - assets/images/4-removebg-preview.png
+    - assets/images/5-removebg-preview.png
+    - assets/images/6-removebg-preview.png
+    - assets/images/7-removebg-preview.png
