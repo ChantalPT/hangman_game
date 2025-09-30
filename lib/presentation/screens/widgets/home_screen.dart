@@ -95,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // cierra el diálogo
+                _nextWord();
               },
               child: const Text('Continuar'),
             ),
@@ -118,11 +119,11 @@ class _HomeScreenState extends State<HomeScreen> {
       if (currentWord.isComplete) {
         won++;
         _showEndDialog(true);
-        _nextWord();
+        //_nextWord();
       } else if (currentWord.isLost) {
         lost++;
         _showEndDialog(false);
-        _nextWord();
+        //_nextWord();
       }
     });
   }
