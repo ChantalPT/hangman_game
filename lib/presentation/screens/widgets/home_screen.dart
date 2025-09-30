@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hangman_game/data/datasources/word_remote_datasource.dart';
 import 'package:hangman_game/data/repositories/word_repository_impl.dart';
 import 'package:hangman_game/domain/entities/word.dart';
+import 'package:hangman_game/data/datasources/score_storage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,10 +25,27 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   String? errorMessage;
 
+  final ScoreStorage scoreStorage = ScoreStorage();
+
   @override
   void initState() {
     super.initState();
+    _loadScores(); // ⬅️ Cargar historial guardado
     _fetchWords();
+  }
+
+  // Cargar desde SharedPreferences
+  Future<void> _loadScores() async {
+    final scores = await scoreStorage.loadScores();
+    setState(() {
+      won = scores["won"]!;
+      lost = scores["lost"]!;
+    });
+  }
+
+  // Guardar en SharedPreferences
+  Future<void> _saveScores() async {
+    await scoreStorage.saveScores(won, lost);
   }
 
   Future<void> _fetchWords() async {
@@ -60,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         currentIndex++;
         currentWord = Word(originalWord: wordList[currentIndex]);
-
         correctGuesses = 0;
         wrongGuesses = 0;
         attempts = 0;
@@ -118,12 +135,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
       if (currentWord.isComplete) {
         won++;
+
         _showEndDialog(true);
         //_nextWord();
       } else if (currentWord.isLost) {
         lost++;
         _showEndDialog(false);
         //_nextWord();
+
       }
     });
   }
@@ -154,44 +173,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadiusGeometry.circular(15),
                             ),
                             child: ConstrainedBox(
-                              //permite colocar un tamano minimo y max a la card
                               constraints: BoxConstraints(minHeight: 100),
-
                               child: Padding(
-                                //padding: const EdgeInsets.all(16),
                                 padding: const EdgeInsets.only(top: 20),
-
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(
                                       children: [
-                                        Text(
-                                          '$won',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Won',
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color.fromARGB(
-                                              255,
-                                              76,
-                                              74,
-                                              74,
-                                            ),
-                                          ),
-                                        ),
+                                        Text('$won',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.green)),
+                                        const Text('Won'),
                                       ],
                                     ),
                                     Column(
                                       children: [
+
                                         Text(
                                           '${won + lost}',
                                           style: TextStyle(
@@ -242,6 +243,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                       ],
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.refresh,
+                                          color: Colors.grey),
+                                      onPressed: () async {
+                                        await scoreStorage.resetScores();
+                                        setState(() {
+                                          won = 0;
+                                          lost = 0;
+                                        });
+                                      },
                                     ),
                                   ],
                                 ),
