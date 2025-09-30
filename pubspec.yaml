@@ -90,10 +90,10 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
   assets:
-    - assets/images/1.png
-    - assets/images/2.png
-    - assets/images/3.png
-    - assets/images/4.png
-    - assets/images/5.png
-    - assets/images/6.png
-    - assets/images/7.png
+    - assets/images/1-removebg-preview.png
+    - assets/images/2-removebg-preview.png
+    - assets/images/3-removebg-preview.png
+    - assets/images/4-removebg-preview.png
+    - assets/images/5-removebg-preview.png
+    - assets/images/6-removebg-preview.png
+    - assets/images/7-removebg-preview.png

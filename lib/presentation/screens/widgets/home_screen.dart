@@ -363,6 +363,40 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
 
+                          Card(
+                            elevation: 8,
+                            margin: const EdgeInsets.all(30),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minHeight: 400,
+                                maxHeight: 400,
+                              ),
+
+                              child: Padding(
+                                //padding: const EdgeInsets.all(16),
+                                padding: const EdgeInsets.only(top: 20),
+
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/img1.png',
+                                          width: 300,
+                                          height: 300,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                           //Word guessing card
                           Card(
                             elevation: 8,
@@ -372,8 +406,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: ConstrainedBox(
                               constraints: const BoxConstraints(
-                                minHeight: 120,
-                                maxHeight: 200,
+                                minHeight: 100,
+                                maxHeight: 100,
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
